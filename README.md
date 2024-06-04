@@ -68,9 +68,9 @@ To revert all applied migrations, use:
 npm run db:migrate:undo
 ```
 Explanation
-db:drop: Drops the existing database.
-db:create: Creates a new database based on the configuration.
-db:migrate: Runs all the migrations that haven't been run yet, creating or altering database tables as necessary.
-db:seed: Seeds the database with initial data.
-db:migrate:undo: Reverts all applied migrations, effectively rolling back all changes made by migrations.
+1. db:drop: Drops the existing database.
+2. db:create: Creates a new database based on the configuration.
+3. db:migrate: Runs all the migrations that haven't been run yet, creating or altering database tables as necessary.
+4. db:seed: Seeds the database with initial data.
+5. db:migrate:undo: Reverts all applied migrations, effectively rolling back all changes made by migrations.
 Ensure you have configured your environment variables correctly before running these commands, especially those related to the database configuration.
