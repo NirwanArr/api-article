@@ -15,8 +15,6 @@ DB_NAME=mydatabase
 PORT=3000
 ```
 
-perl
-
 Replace the example values with your actual database credentials and other configuration settings.
 
 ## Installation
