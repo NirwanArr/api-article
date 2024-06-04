@@ -1,4 +1,3 @@
-markdown
 # Api Articles
 
 ## Configuration
