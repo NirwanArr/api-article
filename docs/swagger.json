@@ -1,0 +1,486 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "description": "API for article",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9000/api/v1"
+    }
+  ],
+  "paths": {
+    "/articles": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Return results of API to retrieve all articles",
+        "description": "This API is used to view all articles",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "schema": { "type": "string"},
+            "description": "This query is used to search articles by title or body"
+          },
+          {
+            "in": "query",
+            "name": "author",
+            "schema": { "type": "string"},
+            "description": "This query is used to filter articles by author"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success in displaying all articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer", "example": 1 },
+                      "author": { "type": "string", "example": "John Doe" },
+                      "title": { "type": "string", "example": "Article Title" },
+                      "body": { "type": "string", "example": "Article Body" },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2023-11-28T06:25:24.446Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2023-11-28T06:25:24.446Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No articles found matching your criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "error" },
+                    "message": {
+                      "type": "string",
+                      "example": "No articles found matching your criteria."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "error" },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/create": {
+      "post": {
+        "tags": ["Article"],
+        "summary": "Return results of API to create an article",
+        "description": "This API is used to create an article",
+        "requestBody": {
+          "description": "Request body for successfully creating an article",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "author": { "type": "string", "example": "John Doe" },
+                  "title": { "type": "string", "example": "Article Title" },
+                  "body": { "type": "string", "example": "Article Body" }
+                },
+                "required": ["author", "title", "body"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success in creating an article",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "Success" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "integer", "example": 1 },
+                        "author": { "type": "string", "example": "John Doe" },
+                        "title": {
+                          "type": "string",
+                          "example": "Article Title"
+                        },
+                        "body": { "type": "string", "example": "Article Body" },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2023-11-28T06:25:24.446Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2023-11-28T06:25:24.446Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required field(s) missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "Failed" },
+                    "message": {
+                      "type": "string",
+                      "example": "author, title, body are required fields"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "Failed" },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/{id}": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Retun API to get a specific article by :id",
+        "description": "This API is used to get a specific article",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Article Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "author": {
+                          "type": "text",
+                          "example": "John Doe"
+                        },
+                        "title": {
+                          "type": "text",
+                          "example": "Article Title"
+                        },
+                        "body": {
+                          "type": "text",
+                          "example": "Article Body"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2023-11-28T06:25:24.446Z"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2023-11-28T06:25:24.446Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Article not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/update/{id}": {
+      "put": {
+        "tags": ["Article"],
+        "summary": "Return API for update a article by :id",
+        "description": "API for update a article by :id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "id for course"
+          }
+        ],
+        "requestBody": {
+          "description": "request body for update article",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "author": {
+                    "type": "text",
+                    "example": "John Doe"
+                  },
+                  "title": {
+                    "type": "text",
+                    "example": "Article Title"
+                  },
+                  "body": {
+                    "type": "text",
+                    "example": "Article Body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The data has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "author": {
+                      "type": "text",
+                      "example": "John Doe"
+                    },
+                    "title": {
+                      "type": "text",
+                      "example": "Article Title"
+                    },
+                    "body": {
+                      "type": "text",
+                      "example": "Article Body"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Article not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/delete/{id}": {
+      "delete": {
+        "tags": ["Article"],
+        "summary": "Delete Article",
+        "description": "API for delete a article by :id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "id Article"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article deletion successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "object",
+                      "example": "Article deletion successful."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Failed"
+                    },
+                    "message": {
+                      "type": "object",
+                      "example": "Article not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "object",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}
