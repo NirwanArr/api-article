@@ -7,11 +7,13 @@ To configure the project, ensure you have a `.env` file based on the provided `.
 
 Example:
 
+```bash
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=example
 DB_NAME=mydatabase
 PORT=3000
+```
 
 perl
 
