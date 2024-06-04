@@ -23,43 +23,51 @@ To install the project dependencies, run the following command:
 
 ```bash
 npm install
+```
 This will install all the required packages listed in the package.json file.
+
 
 Running the Project
 To start the project in development mode, use the following command:
 
-bash
+```bash
 npm run dev
+```
 This will start the development server with live reloading enabled, allowing you to see changes immediately.
 
-Database Management
+## Database Management
 This project uses Sequelize for database management. Below are the commands for handling the database:
 
 Drop the Database
 To drop the existing database, use:
 
-bash
+```bash
 npm run db:drop
+```
 Create the Database
 To create a new database, use:
 
-bash
+```bash
 npm run db:create
+```
 Run Migrations
 To apply all pending migrations, use:
 
-bash
+```bash
 npm run db:migrate
+```
 Seed the Database
 To seed the database with initial data, use:
 
-bash
+```bash
 npm run db:seed
+```
 Undo Migrations
 To revert all applied migrations, use:
 
-bash
+```bash
 npm run db:migrate:undo
+```
 Explanation
 db:drop: Drops the existing database.
 db:create: Creates a new database based on the configuration.
