@@ -50,14 +50,3 @@ module.exports = {
     dialect: 'postgres',
   },
 };
-
-// module.exports = {
-//   development: {
-//     username: DB_USERNAME,
-//     password: DB_PASSWORD,
-//     database: DB_NAME,
-//     host: DB_HOST,
-//     dialect: 'postgres',
-//     port: DB_PORT,
-//   },
-// };
